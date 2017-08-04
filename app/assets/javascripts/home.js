@@ -1,0 +1,5 @@
+function initializePage() {
+    $('#table').DataTable();
+
+
+}
