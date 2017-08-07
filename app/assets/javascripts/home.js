@@ -3,12 +3,20 @@ var table;
 function initializePage() {
     table = $('#table').DataTable();
 
-    $('#table tbody').on('click', 'tr', function (xyz) {
-        var data = table.row( this ).data();
-        console.log(xyz);
-        for (var i in data)
-            console.log(data[i]);
+    $('#table tbody').on('click', 'td', function (xyz) {
+        var cell = table.cell(this);
 
-        // alert( 'You clicked on '+data[0]+'\'s row' );
-    } );
+        var rowIndex = cell.index().row;
+        var columnIndex = cell.index().column;
+        console.log('clicked cell row: ' + rowIndex);
+        console.log('clicked cell column: ' + columnIndex);
+
+        var cellData = cell.data();
+        console.log('clicked cell content: "' + cellData + '"');
+
+        table
+            .cell(rowIndex, columnIndex)
+            .data('<p style="color:red">' + cellData + '</p>')
+            .draw(false);
+    });
 }
